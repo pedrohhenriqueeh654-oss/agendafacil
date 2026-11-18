@@ -1,0 +1,11 @@
+{% extends "agenda/base.html" %}
+{% block title %}Minhas reservas{% endblock %}
+{% block content %}
+<h1>Minhas reservas</h1>
+<div class="cards">{% for record in records %}
+  <article class="card"><h2>{{ record.service.name }}</h2>
+  <p>{{ record.date|date:"d/m/Y" }} às {{ record.start|time:"H:i" }} com {{ record.professional }}.</p>
+  <p>{{ record.get_status_display }}</p><a href="{% url 'confirmation' record.pk %}">Ver detalhes</a></article>
+{% empty %}<p class="notice">Você ainda não tem agendamentos.</p>{% endfor %}</div>
+<a href="{% url 'booking' %}" class="button primary">Agendar atendimento</a>
+{% endblock %}

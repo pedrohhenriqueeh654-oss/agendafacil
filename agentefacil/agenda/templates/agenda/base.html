@@ -1,0 +1,27 @@
+{% load static %}<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Início{% endblock %} | AgendaFácil</title>
+  <link rel="stylesheet" href="{% static 'agenda/style.css' %}">
+</head>
+<body>
+  <a class="skip" href="#conteudo">Ir para o conteúdo</a>
+  <header class="header"><div class="shell header-inner">
+    <a class="brand" href="{% url 'home' %}"><span class="brand-icon" aria-hidden="true">▦</span> AgendaFácil</a>
+    {% if user.is_authenticated %}
+    <nav aria-label="Menu principal">
+      {% if user.role == "client" %}<a href="{% url 'booking' %}">Agendar</a><a href="{% url 'history' %}">Minhas reservas</a>
+      {% else %}<a href="{% url 'professional' %}">Meu painel</a>{% endif %}
+      <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="quiet" type="submit">Sair</button></form>
+    </nav>
+    {% endif %}
+  </div></header>
+  <main id="conteudo" tabindex="-1" class="shell page">
+    {% for message in messages %}<p class="notice success" role="status">{{ message }}</p>{% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="shell footer">AgendaFácil · Projeto acadêmico de agendamento de serviços</footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends "agenda/base.html" %}
+{% block title %}Resultado da reserva{% endblock %}
+{% block content %}
+<section class="card compact">
+  <p class="eyebrow">Reserva nº {{ appointment.pk }}</p>
+  {% if appointment.status == "confirmed" %}
+    <h1>Agendamento confirmado!</h1><p class="notice success">Seu horário foi reservado.</p>
+  {% else %}<h1>Agendamento cancelado</h1>{% endif %}
+  <dl>
+    <dt>Serviço</dt><dd>{{ appointment.service.name }}</dd>
+    <dt>Profissional</dt><dd>{{ appointment.professional }}</dd>
+    <dt>Data</dt><dd>{{ appointment.date|date:"d/m/Y" }}</dd>
+    <dt>Horário</dt><dd>{{ appointment.start|time:"H:i" }}–{{ appointment.end|time:"H:i" }}</dd>
+    <dt>Situação</dt><dd>{{ appointment.get_status_display }}</dd>
+  </dl>
+  <div class="actions"><a class="button primary" href="{% url 'history' %}">Ver minhas reservas</a>
+     <a class="button secondary" href="{% url 'booking' %}">Voltar aos serviços</a></div>
+</section>
+{% endblock %}

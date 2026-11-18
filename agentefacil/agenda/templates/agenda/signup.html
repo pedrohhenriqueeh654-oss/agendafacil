@@ -1,0 +1,13 @@
+{% extends "agenda/base.html" %}
+{% block title %}Criar conta{% endblock %}
+{% block content %}
+<section class="card compact">
+  <p class="eyebrow">Primeiro acesso</p>
+  <h1>Criar conta</h1>
+  <p>Escolha o perfil Cliente para fazer reservas ou Profissional para oferecer serviços.</p>
+  <form method="post">{% csrf_token %}{{ form.as_div }}
+    <button type="submit" class="primary">Criar conta</button>
+    <a class="button secondary" href="{% url 'home' %}">Voltar ao login</a>
+  </form>
+</section>
+{% endblock %}

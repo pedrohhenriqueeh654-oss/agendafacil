@@ -1,0 +1,29 @@
+{% extends "agenda/base.html" %}
+{% block title %}Painel profissional{% endblock %}
+{% block content %}
+<p class="eyebrow">Área profissional</p>
+<h1>Minha agenda</h1>
+<p class="muted">Cadastre seus serviços e indique em quais horários você atende.</p>
+<div class="booking-grid">
+<section class="card">
+  <h2>Serviços oferecidos</h2>
+  <ul>{% for service in services %}<li>{{ service.name }} · {{ service.duration }} min · R$ {{ service.price }}</li>
+  {% empty %}<li>Nenhum serviço cadastrado.</li>{% endfor %}</ul>
+  <form method="post">{% csrf_token %}{{ service_form.as_div }}
+    <button type="submit" name="action" value="service" class="primary">Cadastrar serviço</button>
+  </form>
+</section>
+<section class="card">
+  <h2>Horários de atendimento</h2>
+  <ul>{% for period in periods %}<li>{{ period.get_weekday_display }} · {{ period.start|time:"H:i" }}–{{ period.end|time:"H:i" }}</li>
+  {% empty %}<li>Nenhum horário cadastrado.</li>{% endfor %}</ul>
+  <form method="post">{% csrf_token %}{{ hours_form.as_div }}
+    <button type="submit" name="action" value="hours" class="primary">Adicionar horário</button>
+  </form>
+</section>
+</div>
+<section class="card spaced"><h2>Atendimentos agendados</h2>
+  <ul>{% for record in records %}<li>{{ record.date|date:"d/m/Y" }} às {{ record.start|time:"H:i" }} · {{ record.service.name }} · {{ record.client }} · {{ record.get_status_display }}</li>
+  {% empty %}<li>Nenhum atendimento reservado.</li>{% endfor %}</ul>
+</section>
+{% endblock %}

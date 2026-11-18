@@ -1,0 +1,26 @@
+{% extends "agenda/base.html" %}
+{% block title %}Entrar{% endblock %}
+{% block content %}
+<div class="welcome">
+  <section class="hero">
+    <p class="eyebrow">Sua agenda, mais simples</p>
+    <h1>Agende seu próximo atendimento sem complicação.</h1>
+    <p>Escolha um serviço, encontre um horário livre e confirme sua reserva em poucos passos.</p>
+    <ul class="highlights">
+      <li>Horários disponíveis em um só lugar</li>
+      <li>Confirmação com os detalhes da reserva</li>
+      <li>Acesso pelo navegador do celular ou computador</li>
+    </ul>
+  </section>
+  <section class="card">
+    <h2>Entrar no AgendaFácil</h2>
+    <p class="muted">Use o e-mail e a senha da sua conta.</p>
+    <form method="post">{% csrf_token %}
+      {{ form.as_div }}
+      <input type="hidden" name="next" value="{{ next }}">
+      <button class="primary" type="submit">Entrar</button>
+    </form>
+    <p>Ainda não tem conta? <a href="{% url 'signup' %}">Criar conta</a></p>
+  </section>
+</div>
+{% endblock %}
