@@ -285,3 +285,13 @@ O próximo objetivo é continuar aprimorando a aplicação, realizando testes e 
 ---
 
 **AgendaFácil — Projeto acadêmico de desenvolvimento de software.**
+
+## Revisão técnica do projeto
+
+Esta etapa tem como objetivo revisar a organização e a qualidade do código do AgendaFácil antes de integrar novas alterações à versão principal.
+
+A revisão será concentrada em quatro aspectos: separação das responsabilidades entre os arquivos, clareza das regras de agendamento, validação das informações recebidas e proteção dos dados dos usuários.
+
+Também serão observados possíveis pontos de melhoria na manutenção do sistema, considerando que o projeto utiliza Python, Django e SQLite.
+
+As observações identificadas durante a análise serão registradas no Pull Request, permitindo acompanhar o que foi verificado e quais ajustes poderão ser necessários futuramente.
